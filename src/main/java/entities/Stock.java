@@ -2,6 +2,9 @@ package entities;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -13,7 +16,8 @@ public class Stock implements java.io.Serializable {
     private Integer stockId;
     private String stockCode;
     private String stockName;
-    private StockDetail stockDetail;
+    private Set<StockDailyRecord> stockDailyRecords = new HashSet<StockDailyRecord>(
+            0);
 
     public Stock() {
     }
@@ -23,10 +27,11 @@ public class Stock implements java.io.Serializable {
         this.stockName = stockName;
     }
 
-    public Stock(String stockCode, String stockName, StockDetail stockDetail) {
+    public Stock(String stockCode, String stockName,
+                 Set<StockDailyRecord> stockDailyRecords) {
         this.stockCode = stockCode;
         this.stockName = stockName;
-        this.stockDetail = stockDetail;
+        this.stockDailyRecords = stockDailyRecords;
     }
 
     @Id
@@ -49,7 +54,6 @@ public class Stock implements java.io.Serializable {
         this.stockCode = stockCode;
     }
 
-
     @Column(name = "STOCK_NAME", unique = true, nullable = false, length = 20)
     public String getStockName() {
         return this.stockName;
@@ -59,13 +63,13 @@ public class Stock implements java.io.Serializable {
         this.stockName = stockName;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "stock", cascade = CascadeType.ALL)
-    public StockDetail getStockDetail() {
-        return this.stockDetail;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
+    public Set<StockDailyRecord> getStockDailyRecords() {
+        return this.stockDailyRecords;
     }
 
-    public void setStockDetail(StockDetail stockDetail) {
-        this.stockDetail = stockDetail;
+    public void setStockDailyRecords(Set<StockDailyRecord> stockDailyRecords) {
+        this.stockDailyRecords = stockDailyRecords;
     }
 
 }

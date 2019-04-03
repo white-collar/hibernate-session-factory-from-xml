@@ -1,5 +1,5 @@
 import entities.Stock;
-import entities.StockDetail;
+import entities.StockDailyRecord;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import utils.HibernateUtils;
@@ -16,20 +16,22 @@ public class HibernateDemo {
         session.beginTransaction();
 
         Stock stock = new Stock();
-
-        stock.setStockCode("7052");
-        stock.setStockName("AmazonI");
-
-        StockDetail stockDetail = new StockDetail();
-        stockDetail.setCompName("Netflix");
-        stockDetail.setCompDesc("one stop shopping");
-        stockDetail.setRemark("Love,Death&Robots");
-        stockDetail.setListedDate(new Date());
-
-        stock.setStockDetail(stockDetail);
-        stockDetail.setStock(stock);
-
+        stock.setStockCode("70521");
+        stock.setStockName("PADINI");
         session.save(stock);
+
+        StockDailyRecord stockDailyRecords = new StockDailyRecord();
+        stockDailyRecords.setPriceOpen(new Float("1.2"));
+        stockDailyRecords.setPriceClose(new Float("1.1"));
+        stockDailyRecords.setPriceChange(new Float("10.0"));
+        stockDailyRecords.setVolume(3000000L);
+        stockDailyRecords.setDate(new Date());
+
+        stockDailyRecords.setStock(stock);
+        stock.getStockDailyRecords().add(stockDailyRecords);
+
+        session.save(stockDailyRecords);
+
         session.getTransaction().commit();
         sessionFactory.close();
 

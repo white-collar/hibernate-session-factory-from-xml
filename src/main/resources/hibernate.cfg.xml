@@ -53,7 +53,7 @@
 
         <property name="hbm2ddl.auto">update</property>
         <mapping class="entities.Stock"></mapping>
-        <mapping class="entities.StockDetail"></mapping>
+        <mapping class="entities.StockDailyRecord"></mapping>
 
 
     </session-factory>
