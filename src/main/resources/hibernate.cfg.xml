@@ -12,13 +12,13 @@
 
         <!-- JDBC connection settings -->
 
-        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 
-        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/hibernate_demo?serverTimezone=UTC</property>
 
-        <property name="connection.username">postgres</property>
+        <property name="connection.username">root</property>
 
-        <property name="connection.password"></property>
+        <property name="connection.password">root</property>
 
 
 
@@ -29,7 +29,7 @@
 
         <!-- Defines the SQL dialect used in Hiberante's application -->
 
-        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
 
 
         <!-- Enable Hibernate's automatic session context management -->
@@ -52,6 +52,7 @@
         <!-- Drop and re-create the database schema on startup -->
 
         <property name="hbm2ddl.auto">update</property>
+        <mapping class="entities.Employee"></mapping>
 
 
     </session-factory>
