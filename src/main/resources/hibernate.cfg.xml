@@ -52,7 +52,8 @@
         <!-- Drop and re-create the database schema on startup -->
 
         <property name="hbm2ddl.auto">update</property>
-        <mapping class="entities.Employee"></mapping>
+        <mapping class="entities.Stock"></mapping>
+        <mapping class="entities.StockDetail"></mapping>
 
 
     </session-factory>

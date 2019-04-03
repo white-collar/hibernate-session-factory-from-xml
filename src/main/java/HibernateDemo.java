@@ -1,7 +1,10 @@
-import entities.Employee;
+import entities.Stock;
+import entities.StockDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import utils.HibernateUtils;
+
+import java.util.Date;
 
 public class HibernateDemo {
 
@@ -12,12 +15,21 @@ public class HibernateDemo {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Employee employee = new Employee();
-        employee.setEmail("email@email.com");
-        employee.setFirstName("Sherlock");
-        employee.setLastName("Holmes");
+        Stock stock = new Stock();
 
-        session.save(employee);
+        stock.setStockCode("7052");
+        stock.setStockName("AmazonI");
+
+        StockDetail stockDetail = new StockDetail();
+        stockDetail.setCompName("Netflix");
+        stockDetail.setCompDesc("one stop shopping");
+        stockDetail.setRemark("Love,Death&Robots");
+        stockDetail.setListedDate(new Date());
+
+        stock.setStockDetail(stockDetail);
+        stockDetail.setStock(stock);
+
+        session.save(stock);
         session.getTransaction().commit();
         sessionFactory.close();
 
