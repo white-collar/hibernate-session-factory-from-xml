@@ -1,11 +1,12 @@
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import utils.HibernateUtils;
 
 public class HibernateDemo {
 
     public static SessionFactory sessionFactory;
 
     public static void main(String[] args) {
-        sessionFactory =  new Configuration().configure().buildSessionFactory();
+        sessionFactory = HibernateUtils.getSessionFactory();
+        System.out.println(sessionFactory);
     }
 }
